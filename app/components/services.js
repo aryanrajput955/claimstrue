@@ -71,7 +71,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" ref={sectionRef} className="py-24 lg:py-28 bg-gradient-to-b from-gray-50/80 to-white">
+    <section id="services" ref={sectionRef} className="py-24 lg:py-28 bg-gradient-to-b from-gray-50/80 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="services-header text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#27A395]/10 text-[#27A395] text-sm font-semibold mb-4">
