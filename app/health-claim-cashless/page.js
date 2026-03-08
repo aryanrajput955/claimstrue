@@ -19,106 +19,57 @@ export default function CashlessClaimsPage() {
   const trialRef = useRef(null);
 
   useEffect(() => {
+    if (!heroRef.current) return;
+
     const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
-    tl.fromTo(heroRef.current.querySelector('.hero-content'), 
-      { opacity: 0, y: 15 }, 
-      { opacity: 1, y: 0, duration: 0.5 }
-    )
-    .fromTo(heroRef.current.querySelectorAll('.hero-cta button'), 
-      { opacity: 0, y: 10 }, 
-      { opacity: 1, y: 0, duration: 0.3, stagger: 0.05 }
-    );
+    const heroContent = heroRef.current.querySelector('.hero-content');
+    if (heroContent) {
+      tl.fromTo(heroContent, 
+        { opacity: 0, y: 15 }, 
+        { opacity: 1, y: 0, duration: 0.5 }
+      );
+    }
 
-    gsap.fromTo(problemRef.current.querySelectorAll('.problem-item'), 
-      { opacity: 0, y: 20 }, 
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: problemRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
+    const heroButtons = heroRef.current.querySelectorAll('.hero-cta button');
+    if (heroButtons.length > 0) {
+      tl.fromTo(heroButtons, 
+        { opacity: 0, y: 10 }, 
+        { opacity: 1, y: 0, duration: 0.3, stagger: 0.05 }
+      );
+    }
 
-    gsap.fromTo(solutionRef.current.querySelectorAll('.solution-step'), 
-      { opacity: 0, x: -20 }, 
-      { 
-        opacity: 1, 
-        x: 0, 
-        duration: 0.6, 
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: solutionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
+    const sections = [
+      { ref: problemRef, selector: '.problem-item', x: 0, y: 20 },
+      { ref: solutionRef, selector: '.solution-step', x: -20, y: 0 },
+      { ref: whyChooseRef, selector: '.why-choose-item', x: -20, y: 0 },
+      { ref: expertiseRef, selector: '.expertise-item', x: 0, y: 20 },
+      { ref: featuresRef, selector: '.feature-item', x: -20, y: 0 },
+      { ref: trialRef, selector: '.trial-step', x: 0, y: 20 },
+    ];
 
-    gsap.fromTo(whyChooseRef.current.querySelectorAll('.why-choose-item'), 
-      { opacity: 0, x: -20 }, 
-      { 
-        opacity: 1, 
-        x: 0, 
-        duration: 0.6, 
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: whyChooseRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
+    sections.forEach(({ ref, selector, x, y }) => {
+      if (ref.current) {
+        const elements = ref.current.querySelectorAll(selector);
+        if (elements.length > 0) {
+          gsap.fromTo(elements, 
+            { opacity: 0, x, y }, 
+            { 
+              opacity: 1, 
+              x: 0,
+              y: 0, 
+              duration: 0.6, 
+              stagger: 0.1,
+              scrollTrigger: {
+                trigger: ref.current,
+                start: 'top 80%',
+                toggleActions: 'play none none none',
+              },
+            }
+          );
+        }
       }
-    );
-
-    gsap.fromTo(expertiseRef.current.querySelectorAll('.expertise-item'), 
-      { opacity: 0, y: 20 }, 
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: expertiseRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-
-    gsap.fromTo(featuresRef.current.querySelectorAll('.feature-item'), 
-      { opacity: 0, x: -20 }, 
-      { 
-        opacity: 1, 
-        x: 0, 
-        duration: 0.6, 
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: featuresRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-
-    gsap.fromTo(trialRef.current.querySelectorAll('.trial-step'), 
-      { opacity: 0, y: 20 }, 
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: trialRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
+    });
 
     return () => {
       tl.kill();

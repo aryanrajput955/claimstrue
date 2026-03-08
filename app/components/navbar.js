@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, User, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronDown, User, ChevronRight, LogOut } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import useAuthStore from "../lib/authstore";
 
 export default function Navbar() {
@@ -239,115 +240,202 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Toggle */}
-            <button
-              onClick={() => setIsOpen((v) => !v)}
-              className="md:hidden text-[#354B62] hover:text-[#27A395] transition-colors"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+            <div className="flex md:hidden items-center">
+              {token && (
+                 <button
+                 onClick={toggleSideNav}
+                 className="flex items-center justify-center p-2 mr-2 text-[#354B62] hover:text-[#27A395] transition-colors"
+               >
+                 <User className="w-6 h-6" />
+               </button>
+              )}
+              <button
+                onClick={() => setIsOpen((v) => !v)}
+                className="flex items-center justify-center p-2 rounded-lg text-[#354B62] hover:bg-gray-100 hover:text-[#27A395] transition-all relative z-[60] active:scale-95"
+                aria-label="Toggle menu"
+              >
+                {isOpen ? (
+                  <X className="h-7 w-7" strokeWidth={2.5} />
+                ) : (
+                  <Menu className="h-7 w-7" strokeWidth={2.5} />
+                )}
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link href="/" className="block px-3 py-2 text-[#354B62] hover:text-[#27A395] font-medium" onClick={() => setIsOpen(false)}>
-                Home
-              </Link>
-
-              {/* Enterprise Mobile */}
-              <div className="px-3 py-2">
-                <button
-                  onClick={() => setIsEnterpriseOpen((v) => !v)}
-                  className="flex w-full items-center justify-between text-left text-[#354B62] hover:text-[#27A395] font-medium"
-                >
-                  Enterprise Solutions
-                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${isEnterpriseOpen ? "rotate-180" : ""}`} />
-                </button>
-                {isEnterpriseOpen && (
-                  <div className="mt-2 pl-4 space-y-1 bg-gray-50 rounded-lg p-2">
-                    {enterpriseSolutions.map((s, i) => (
-                      <Link
-                        key={i}
-                        href={s.href}
-                        className="flex items-center py-2 text-sm text-gray-600 hover:text-[#27A395]"
-                        onClick={() => {
-                          setIsOpen(false);
-                          setIsEnterpriseOpen(false);
-                        }}
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#27A395] mr-2"></div>
-                        {s.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Personal Mobile */}
-              <div className="px-3 py-2">
-                <button
-                  onClick={() => setIsPersonalOpen((v) => !v)}
-                  className="flex w-full items-center justify-between text-left text-[#354B62] hover:text-[#27A395] font-medium"
-                >
-                  Personal Solutions
-                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${isPersonalOpen ? "rotate-180" : ""}`} />
-                </button>
-                {isPersonalOpen && (
-                  <div className="mt-2 pl-4 space-y-1 bg-gray-50 rounded-lg p-2">
-                    {personalSolutions.map((s, i) => (
-                      <Link
-                        key={i}
-                        href={s.href}
-                        className="flex items-center py-2 text-sm text-gray-600 hover:text-[#27A395]"
-                        onClick={() => {
-                          setIsOpen(false);
-                          setIsPersonalOpen(false);
-                        }}
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#27A395] mr-2"></div>
-                        {s.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <Link href="/about-us" className="block px-3 py-2 text-[#354B62] hover:text-[#27A395] font-medium" onClick={() => setIsOpen(false)}>
-                About Us
-              </Link>
-              <Link href="/contact" className="block px-3 py-2 text-[#354B62] hover:text-[#27A395] font-medium" onClick={() => setIsOpen(false)}>
-                Contact
-              </Link>
-
-              {token ? (
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    toggleSideNav();
-                  }}
-                  className="block w-full cursor-pointer text-left px-3 py-2 text-[#354B62] hover:text-[#27A395] font-medium"
-                >
-                  Profile
-                </button>
-              ) : (
-                <>
-                  <Link href="/login" className="block px-3 py-2 text-[#354B62] hover:text-[#27A395] font-medium" onClick={() => setIsOpen(false)}>
-                    Login
-                  </Link>
-                  <Link
-                    href="/signup"
-                    className="block mx-3 mt-2 bg-gradient-to-r from-[#27A395] to-[#33A8D3] text-white px-4 py-2 rounded-lg font-medium text-center shadow-lg"
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              {/* Backdrop for closing */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsOpen(false)}
+                className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+              />
+              {/* Menu Content */}
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="md:hidden bg-white border-t border-gray-100 shadow-2xl relative z-50 overflow-hidden"
+              >
+                <div className="px-4 pt-4 pb-8 space-y-4 max-h-[85vh] overflow-y-auto">
+                  <Link 
+                    href="/" 
+                    className="flex items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
-                    Sign Up
+                    <span>Home</span>
+                    <ChevronRight className="h-4 w-4 opacity-30" />
                   </Link>
-                </>
-              )}
-            </div>
-          </div>
-        )}
+
+                  {/* Enterprise Mobile */}
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => setIsEnterpriseOpen((v) => !v)}
+                      className="flex w-full items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
+                    >
+                      <span>Hospital Solutions</span>
+                      <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isEnterpriseOpen ? "rotate-180" : ""}`} />
+                    </button>
+                    <AnimatePresence>
+                      {isEnterpriseOpen && (
+                        <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="pl-4 space-y-1 bg-gray-50/50 rounded-2xl p-2 ml-4 border-l-2 border-[#27A395]"
+                        >
+                          {enterpriseSolutions.map((s, i) => (
+                            <Link
+                              key={i}
+                              href={s.href}
+                              className="flex items-center py-3 px-4 text-sm text-gray-600 hover:text-[#27A395] font-medium"
+                              onClick={() => {
+                                setIsOpen(false);
+                                setIsEnterpriseOpen(false);
+                              }}
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full bg-[#27A395] mr-3"></div>
+                              {s.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Personal Mobile */}
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => setIsPersonalOpen((v) => !v)}
+                      className="flex w-full items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
+                    >
+                      <span>Individual Solutions</span>
+                      <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isPersonalOpen ? "rotate-180" : ""}`} />
+                    </button>
+                    <AnimatePresence>
+                      {isPersonalOpen && (
+                        <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="pl-4 space-y-1 bg-gray-50/50 rounded-2xl p-2 ml-4 border-l-2 border-[#27A395]"
+                        >
+                          {personalSolutions.map((s, i) => (
+                            <Link
+                              key={i}
+                              href={s.href}
+                              className="flex items-center py-3 px-4 text-sm text-gray-600 hover:text-[#27A395] font-medium"
+                              onClick={() => {
+                                setIsOpen(false);
+                                setIsPersonalOpen(false);
+                              }}
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full bg-[#27A395] mr-3"></div>
+                              {s.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  <Link 
+                    href="/about-us" 
+                    className="flex items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span>About Us</span>
+                    <ChevronRight className="h-4 w-4 opacity-30" />
+                  </Link>
+                  <Link 
+                    href="/contact" 
+                    className="flex items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span>Contact</span>
+                    <ChevronRight className="h-4 w-4 opacity-30" />
+                  </Link>
+
+                  <div className="pt-4 border-t border-gray-100">
+                    {token ? (
+                      <div className="space-y-3">
+                        <button
+                          onClick={() => {
+                            setIsOpen(false);
+                            toggleSideNav();
+                          }}
+                          className="flex w-full items-center px-4 py-4 bg-gray-50 rounded-2xl text-[#354B62] font-bold shadow-sm"
+                        >
+                          <div className="w-10 h-10 bg-gradient-to-r from-[#27A395] to-[#33A8D3] rounded-full flex items-center justify-center mr-4 shadow-md">
+                            <User className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="text-left">
+                            <div className="text-sm opacity-60 font-medium">Signed in as</div>
+                            <div className="text-base truncate">{user?.name || "User"}</div>
+                          </div>
+                        </button>
+                        <button
+                          onClick={() => {
+                            clearAuth();
+                            setIsOpen(false);
+                          }}
+                          className="flex w-full items-center justify-center px-4 py-4 bg-red-50 text-red-600 rounded-2xl font-bold transition-all active:scale-95"
+                        >
+                          <LogOut className="w-5 h-5 mr-3" />
+                          Logout
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-4">
+                        <Link 
+                          href="/login" 
+                          className="flex items-center justify-center px-6 py-4 border-2 border-gray-100 text-[#354B62] font-bold rounded-2xl hover:bg-gray-50 transition-all"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Login
+                        </Link>
+                        <Link
+                          href="/signup"
+                          className="flex items-center justify-center px-6 py-4 bg-gradient-to-r from-[#27A395] to-[#33A8D3] text-white font-bold rounded-2xl shadow-lg shadow-[#27A395]/20"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Sign Up
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* SIDE NAVBAR – ALWAYS SOLID, ALWAYS VISIBLE */}
@@ -362,9 +450,9 @@ export default function Navbar() {
           <div className="relative w-80 bg-white h-full shadow-2xl flex flex-col overflow-y-auto p-6 rounded-l-xl">
             <button
               onClick={toggleSideNav}
-              className="absolute top-6 right-6 text-[#354B62] hover:text-[#27A395] p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-[#27A395]"
+              className="absolute top-6 right-6 text-[#354B62] hover:text-[#27A395] p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#27A395] bg-gray-50"
             >
-              <X class逝Name="h-6 w-6" />
+              <X className="h-6 w-6" />
             </button>
 
             {/* Profile */}

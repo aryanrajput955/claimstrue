@@ -19,12 +19,17 @@ export default function RejectedClaimsRecoveryPage() {
   const trialRef = useRef(null);
 
   useEffect(() => {
+    if (!heroRef.current) return;
+
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.fromTo(heroRef.current.querySelector('.hero-content'), 
-      { opacity: 0, y: 30 }, 
-      { opacity: 1, y: 0, duration: 1 }
-    );
+    const heroContent = heroRef.current.querySelector('.hero-content');
+    if (heroContent) {
+      tl.fromTo(heroContent, 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 1 }
+      );
+    }
 
     const sections = [
       { ref: problemRef, selector: '.problem-item' },
@@ -36,20 +41,25 @@ export default function RejectedClaimsRecoveryPage() {
     ];
 
     sections.forEach(({ ref, selector }) => {
-      gsap.fromTo(ref.current.querySelectorAll(selector), 
-        { opacity: 0, y: 30 }, 
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8, 
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: ref.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
+      if (ref.current) {
+        const elements = ref.current.querySelectorAll(selector);
+        if (elements.length > 0) {
+          gsap.fromTo(elements, 
+            { opacity: 0, y: 30 }, 
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.8, 
+              stagger: 0.15,
+              scrollTrigger: {
+                trigger: ref.current,
+                start: 'top 80%',
+                toggleActions: 'play none none none',
+              },
+            }
+          );
         }
-      );
+      }
     });
 
     return () => {
