@@ -172,7 +172,7 @@ export default function Footer() {
                     placeholder="Enter your email"
                     className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-l-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#27A395] focus:border-transparent"
                   />
-                  <button className="bg-gradient-to-r from-[#27A395] to-[#33A8D3] px-4 py-2 rounded-r-lg hover:from-[#33A8D3] hover:to-[#27A395] transition-all duration-300">
+                  <button className="cursor-pointer bg-gradient-to-r from-[#27A395] to-[#33A8D3] px-4 py-2 rounded-r-lg hover:from-[#33A8D3] hover:to-[#27A395] transition-all duration-300">
                     <ArrowRight className="w-5 h-5" />
                   </button>
                 </div>

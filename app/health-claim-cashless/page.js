@@ -393,13 +393,13 @@ export default function CashlessClaimsPage() {
 
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/signup" className="w-full sm:w-auto">
-                <button className="w-full bg-[#27A395] text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-[#229b87] transition-all duration-300 flex items-center justify-center shadow-2xl">
+                <button className="cursor-pointer w-full bg-[#27A395] text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-[#229b87] transition-all duration-300 flex items-center justify-center shadow-2xl">
                   Start Risk-Free Trial
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
               </Link>
               <Link href="/contact" className="w-full sm:w-auto">
-                <button className="w-full bg-white/10 border border-white/20 backdrop-blur-md text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all duration-300">
+                <button className="cursor-pointer w-full bg-white/10 border border-white/20 backdrop-blur-md text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all duration-300">
                   Talk to an Expert
                 </button>
               </Link>

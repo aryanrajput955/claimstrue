@@ -304,7 +304,7 @@ const UserJourneyTimeline = () => {
 
   if (loading) return <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><div className="text-center"><div className="w-12 h-12 border-4 border-[#27A395] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div><h3 className="text-lg font-semibold">Loading Journeys...</h3></div></div>;
 
-  if (error) return <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><div className="text-center"><AlertCircle className="w-12 h-12 text-red-600 mx-auto mb-4"/><h3 className="text-xl font-bold">Error</h3><p className="text-gray-600">{error}</p><button onClick={() => window.location.reload()} className="mt-4 bg-[#27A395] text-white px-6 py-2 rounded-lg">Retry</button></div></div>;
+  if (error) return <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><div className="text-center"><AlertCircle className="w-12 h-12 text-red-600 mx-auto mb-4"/><h3 className="text-xl font-bold">Error</h3><p className="text-gray-600">{error}</p><button onClick={() => window.location.reload()} className="cursor-pointer mt-4 bg-[#27A395] text-white px-6 py-2 rounded-lg">Retry</button></div></div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-6 px-4">
@@ -323,20 +323,20 @@ const UserJourneyTimeline = () => {
         </div>
 
         <div className="flex space-x-1 bg-white rounded-xl p-1.5 shadow-md mb-6">
-          <button onClick={() => setActiveTab('journeys')} className={`flex-1 py-2 px-4 rounded-lg font-bold ${activeTab === 'journeys' ? 'bg-[#27A395] text-white' : 'text-gray-600'}`}>Your Journeys</button>
-          <button onClick={() => setActiveTab('process')} className={`flex-1 py-2 px-4 rounded-lg font-bold ${activeTab === 'process' ? 'bg-[#27A395] text-white' : 'text-gray-600'}`}>Claim Process</button>
+            <button onClick={() => setActiveTab('journeys')} className={`cursor-pointer flex-1 py-2 px-4 rounded-lg font-bold ${activeTab === 'journeys' ? 'bg-[#27A395] text-white' : 'text-gray-600'}`}>Your Journeys</button>
+          <button onClick={() => setActiveTab('process')} className={`cursor-pointer flex-1 py-2 px-4 rounded-lg font-bold ${activeTab === 'process' ? 'bg-[#27A395] text-white' : 'text-gray-600'}`}>Claim Process</button>
         </div>
 
         <div className="flex justify-end mb-6">
           <div className="relative">
-            <button onClick={() => setShowJourneyMenu(v => !v)} disabled={creating} className="bg-[#27A395] text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2">
+            <button onClick={() => setShowJourneyMenu(v => !v)} disabled={creating} className="cursor-pointer bg-[#27A395] text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2">
               {creating ? <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"/> : <Plus className="w-5 h-5"/>}
               Start New Journey <ChevronDown className={`w-5 h-5 transition-transform ${showJourneyMenu ? 'rotate-180' : ''}`}/>
             </button>
             {showJourneyMenu && (
               <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border z-10">
-                <button onClick={() => { createNewJourney('CASHLESS'); setShowJourneyMenu(false); }} className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3"><Shield className="w-5 h-5 text-[#27A395]"/> Cashless Claim</button>
-                <button onClick={() => { createNewJourney('REIMBURSEMENT'); setShowJourneyMenu(false); }} className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 border-t"><FileText className="w-5 h-5 text-[#33A8D3]"/> Reimbursement Claim</button>
+                <button onClick={() => { createNewJourney('CASHLESS'); setShowJourneyMenu(false); }} className="cursor-pointer w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3"><Shield className="w-5 h-5 text-[#27A395]"/> Cashless Claim</button>
+                <button onClick={() => { createNewJourney('REIMBURSEMENT'); setShowJourneyMenu(false); }} className="cursor-pointer w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 border-t"><FileText className="w-5 h-5 text-[#33A8D3]"/> Reimbursement Claim</button>
               </div>
             )}
           </div>

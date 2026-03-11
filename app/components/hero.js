@@ -144,7 +144,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 lg:py-24">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           <div className="lg:col-span-7 space-y-8">
             <div className="hero-badge inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm">
@@ -168,13 +168,13 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <Link href="/signup">
-                <button className="hero-cta-btn bg-gradient-to-r from-[#27A395] to-[#2BBD9E] text-white px-8 py-4 rounded-xl font-semibold text-lg inline-flex items-center justify-center shadow-lg shadow-[#27A395]/25">
+                <button className="cursor-pointer hero-cta-btn bg-gradient-to-r from-[#27A395] to-[#2BBD9E] text-white px-8 py-4 rounded-xl font-semibold text-lg inline-flex items-center justify-center shadow-lg shadow-[#27A395]/25">
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
               </Link>
               <Link href="#services">
-                <button className="hero-cta-btn border-2 border-white/20 bg-white/[0.06] backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold text-lg inline-flex items-center justify-center">
+                <button className="cursor-pointer hero-cta-btn border-2 border-white/20 bg-white/[0.06] backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold text-lg inline-flex items-center justify-center">
                   View Services
                 </button>
               </Link>
@@ -240,7 +240,7 @@ export default function Hero() {
                         type="button"
                         id="hero-serviceType"
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        className={`w-full pl-10 pr-4 py-3 text-sm text-left border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#27A395]/30 focus:border-[#27A395] outline-none bg-gray-50/50 flex items-center justify-between transition-all duration-200 ${!formData.serviceType ? 'text-gray-400' : 'text-gray-800'}`}
+                        className={`cursor-pointer w-full pl-10 pr-4 py-3 text-sm text-left border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#27A395]/30 focus:border-[#27A395] outline-none bg-gray-50/50 flex items-center justify-between transition-all duration-200 ${!formData.serviceType ? 'text-gray-400' : 'text-gray-800'}`}
                       >
                         <FileCheck className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <span className="truncate">
@@ -267,7 +267,7 @@ export default function Hero() {
                                     setFormData({ ...formData, serviceType: service });
                                     setIsDropdownOpen(false);
                                   }}
-                                  className={`w-full px-4 py-2.5 text-sm text-left hover:bg-gray-50 transition-colors flex items-center gap-2 ${formData.serviceType === service ? 'text-[#27A395] font-semibold bg-[#27A395]/5' : 'text-gray-700'}`}
+                                  className={`cursor-pointer w-full px-4 py-2.5 text-sm text-left hover:bg-gray-50 transition-colors flex items-center gap-2 ${formData.serviceType === service ? 'text-[#27A395] font-semibold bg-[#27A395]/5' : 'text-gray-700'}`}
                                 >
                                   {formData.serviceType === service && <div className="w-1.5 h-1.5 rounded-full bg-[#27A395]" />}
                                   {service}
@@ -291,7 +291,7 @@ export default function Hero() {
                     </div>
                   )}
                   <button type="submit" disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-[#27A395] to-[#33A8D3] text-white py-3.5 rounded-xl font-semibold text-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center shadow-lg shadow-[#27A395]/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200">
+                    className="cursor-pointer w-full bg-gradient-to-r from-[#27A395] to-[#33A8D3] text-white py-3.5 rounded-xl font-semibold text-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center shadow-lg shadow-[#27A395]/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200">
                     {isSubmitting ? (
                       <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>Sending...</>
                     ) : (

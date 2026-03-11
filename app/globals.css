@@ -135,6 +135,9 @@
     width: 100%;
     position: relative;
   }
+  button {
+    cursor: pointer;
+  }
 }
 
 /* Custom scrollbar */

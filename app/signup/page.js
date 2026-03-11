@@ -338,7 +338,7 @@ export default function SignupPage() {
                       type="button"
                       onClick={handleContinue}
                       disabled={!validateStep1()}
-                      className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:shadow-lg animate-in fade-in duration-500 delay-700 ${
+                      className={`cursor-pointer w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:shadow-lg animate-in fade-in duration-500 delay-700 ${
                         validateStep1()
                           ? "bg-gradient-to-r from-[#27A395] to-[#33A8D3] text-white hover:from-[#33A8D3] hover:to-[#27A395] hover:scale-105"
                           : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -371,7 +371,7 @@ export default function SignupPage() {
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                          className="cursor-pointer absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                         >
                           {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                         </button>

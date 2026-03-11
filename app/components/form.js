@@ -215,7 +215,7 @@ const FormComponent = ({ formId = 1 }) => {
           <button
             type="submit"
             disabled={submitting}
-            className={`w-full py-2 px-4 rounded-md font-semibold text-white transition ${
+            className={`cursor-pointer w-full py-2 px-4 rounded-md font-semibold text-white transition ${
               submitting ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
             }`}
           >

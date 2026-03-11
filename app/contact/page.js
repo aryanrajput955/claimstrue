@@ -318,7 +318,7 @@ export default function ContactPage() {
                         type="button"
                         id="serviceType"
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        className={`w-full pl-10 pr-10 py-3 text-sm text-left border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#27A395]/30 focus:border-[#27A395] outline-none bg-gray-50/50 focus:bg-white transition-all duration-200 flex items-center justify-between ${!formData.serviceType ? 'text-gray-400' : 'text-gray-700'}`}
+                        className={`cursor-pointer w-full pl-10 pr-10 py-3 text-sm text-left border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#27A395]/30 focus:border-[#27A395] outline-none bg-gray-50/50 focus:bg-white transition-all duration-200 flex items-center justify-between ${!formData.serviceType ? 'text-gray-400' : 'text-gray-700'}`}
                       >
                         <FileCheck className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-300 w-4 h-4" />
                         <span className="truncate">
@@ -345,7 +345,7 @@ export default function ContactPage() {
                                     setFormData({ ...formData, serviceType: service });
                                     setIsDropdownOpen(false);
                                   }}
-                                  className={`w-full px-4 py-2.5 text-sm text-left hover:bg-gray-50 transition-colors flex items-center gap-2 ${formData.serviceType === service ? 'text-[#27A395] font-semibold bg-[#27A395]/5' : 'text-gray-600'}`}
+                                  className={`cursor-pointer w-full px-4 py-2.5 text-sm text-left hover:bg-gray-50 transition-colors flex items-center gap-2 ${formData.serviceType === service ? 'text-[#27A395] font-semibold bg-[#27A395]/5' : 'text-gray-600'}`}
                                 >
                                   {formData.serviceType === service && <div className="w-1.5 h-1.5 rounded-full bg-[#27A395]" />}
                                   {service}

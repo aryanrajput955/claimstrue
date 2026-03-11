@@ -80,7 +80,7 @@ export default function Features() {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-28 relative overflow-hidden">
+    <section ref={sectionRef} className="pt-8 pb-16 lg:pt-14 lg:pb-28 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: 'radial-gradient(circle at 2px 2px, #354B62 1px, transparent 0)',

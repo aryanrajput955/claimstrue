@@ -215,13 +215,13 @@ export default function AboutUsPage() {
 
               <div className="about-hero-cta flex flex-wrap gap-4">
                 <Link href="/contact">
-                  <button className="about-cta-btn bg-gradient-to-r from-[#27A395] to-[#2BBD9E] text-white px-7 py-3.5 rounded-xl font-semibold text-base inline-flex items-center shadow-lg shadow-[#27A395]/25">
+                  <button className="cursor-pointer about-cta-btn bg-gradient-to-r from-[#27A395] to-[#2BBD9E] text-white px-7 py-3.5 rounded-xl font-semibold text-base inline-flex items-center shadow-lg shadow-[#27A395]/25">
                     Talk to Our Team
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </button>
                 </Link>
                 <Link href="#process-section">
-                  <button className="about-secondary-btn border-2 border-[#354B62]/15 text-[#354B62] px-7 py-3.5 rounded-xl font-semibold text-base inline-flex items-center bg-white/60 backdrop-blur-sm">
+                  <button className="cursor-pointer about-secondary-btn border-2 border-[#354B62]/15 text-[#354B62] px-7 py-3.5 rounded-xl font-semibold text-base inline-flex items-center bg-white/60 backdrop-blur-sm">
                     See How We Work
                   </button>
                 </Link>
@@ -516,7 +516,7 @@ export default function AboutUsPage() {
           </div>
 
           <Link href="/contact" className="cta-animate inline-block mb-12">
-            <button className="about-cta-btn bg-gradient-to-r from-[#27A395] to-[#2BBD9E] text-white px-8 py-4 rounded-xl font-semibold text-lg inline-flex items-center shadow-lg shadow-[#27A395]/25">
+            <button className="cursor-pointer about-cta-btn bg-gradient-to-r from-[#27A395] to-[#2BBD9E] text-white px-8 py-4 rounded-xl font-semibold text-lg inline-flex items-center shadow-lg shadow-[#27A395]/25">
               Get Free Consultation
               <ArrowRight className="ml-2 h-5 w-5" />
             </button>

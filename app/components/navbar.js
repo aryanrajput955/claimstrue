@@ -113,7 +113,7 @@ export default function Navbar() {
     <>
       {/* MAIN NAVBAR – blur only when not scrolled */}
       <nav
-        className={`fixed top-0 left-0 right-0 overflow-x-hidden z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled ? "bg-white shadow-lg" : "bg-white/95 backdrop-blur-sm"
         }`}
       >
@@ -132,7 +132,7 @@ export default function Navbar() {
                 <button
                   onMouseEnter={openEnterprise}
                   onMouseLeave={closeEnterprise}
-                  className="flex items-center text-[#354B62] hover:text-[#27A395] transition-colors font-medium py-2"
+                  className="flex items-center cursor-pointer text-[#354B62] hover:text-[#27A395] transition-colors font-medium py-2"
                 >
                   Hospital Solutions
                   <ChevronDown
@@ -144,7 +144,7 @@ export default function Navbar() {
 
                 {isEnterpriseOpen && (
                   <div
-                    className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-3 z-50"
+                    className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-3 z-50 pointer-events-auto"
                     onMouseEnter={keepEnterprise}
                     onMouseLeave={closeEnterprise}
                   >
@@ -173,7 +173,7 @@ export default function Navbar() {
                 <button
                   onMouseEnter={openPersonal}
                   onMouseLeave={closePersonal}
-                  className="flex items-center text-[#354B62] hover:text-[#27A395] transition-colors font-medium py-2"
+                  className="flex items-center cursor-pointer text-[#354B62] hover:text-[#27A395] transition-colors font-medium py-2"
                 >
                   Individual Solutions
                   <ChevronDown
@@ -185,7 +185,7 @@ export default function Navbar() {
 
                 {isPersonalOpen && (
                   <div
-                    className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-3 z-50"
+                    className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-3 z-50 pointer-events-auto"
                     onMouseEnter={keepPersonal}
                     onMouseLeave={closePersonal}
                   >
@@ -220,7 +220,7 @@ export default function Navbar() {
               {token ? (
                 <button
                   onClick={toggleSideNav}
-                  className="flex items-center cursor-pointer hover:scale-105 ease-in  text-[#354B62] hover:text-[#27A395] transition-colors font-medium"
+                  className="flex items-center cursor-pointer hover:scale-105 ease-in text-[#354B62] hover:text-[#27A395] transition-colors font-medium"
                 >
                   <User className="w-6 h-6" />
                 </button>
@@ -244,14 +244,14 @@ export default function Navbar() {
               {token && (
                  <button
                  onClick={toggleSideNav}
-                 className="flex items-center justify-center p-2 mr-2 text-[#354B62] hover:text-[#27A395] transition-colors"
+                 className="flex items-center justify-center cursor-pointer p-2 mr-2 text-[#354B62] hover:text-[#27A395] transition-colors"
                >
                  <User className="w-6 h-6" />
                </button>
               )}
               <button
                 onClick={() => setIsOpen((v) => !v)}
-                className="flex items-center justify-center p-2 rounded-lg text-[#354B62] hover:bg-gray-100 hover:text-[#27A395] transition-all relative z-[60] active:scale-95"
+                className="flex items-center justify-center cursor-pointer p-2 rounded-lg text-[#354B62] hover:bg-gray-100 hover:text-[#27A395] transition-all relative z-[60] active:scale-95"
                 aria-label="Toggle menu"
               >
                 {isOpen ? (
@@ -298,7 +298,7 @@ export default function Navbar() {
                   <div className="space-y-2">
                     <button
                       onClick={() => setIsEnterpriseOpen((v) => !v)}
-                      className="flex w-full items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
+                      className="flex w-full items-center justify-between cursor-pointer px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
                     >
                       <span>Hospital Solutions</span>
                       <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isEnterpriseOpen ? "rotate-180" : ""}`} />
@@ -334,7 +334,7 @@ export default function Navbar() {
                   <div className="space-y-2">
                     <button
                       onClick={() => setIsPersonalOpen((v) => !v)}
-                      className="flex w-full items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
+                      className="flex w-full items-center justify-between cursor-pointer px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
                     >
                       <span>Individual Solutions</span>
                       <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isPersonalOpen ? "rotate-180" : ""}`} />
@@ -391,7 +391,7 @@ export default function Navbar() {
                             setIsOpen(false);
                             toggleSideNav();
                           }}
-                          className="flex w-full items-center px-4 py-4 bg-gray-50 rounded-2xl text-[#354B62] font-bold shadow-sm"
+                          className="flex w-full items-center cursor-pointer px-4 py-4 bg-gray-50 rounded-2xl text-[#354B62] font-bold shadow-sm"
                         >
                           <div className="w-10 h-10 bg-gradient-to-r from-[#27A395] to-[#33A8D3] rounded-full flex items-center justify-center mr-4 shadow-md">
                             <User className="w-5 h-5 text-white" />
@@ -406,7 +406,7 @@ export default function Navbar() {
                             clearAuth();
                             setIsOpen(false);
                           }}
-                          className="flex w-full items-center justify-center px-4 py-4 bg-red-50 text-red-600 rounded-2xl font-bold transition-all active:scale-95"
+                          className="flex w-full items-center justify-center cursor-pointer px-4 py-4 bg-red-50 text-red-600 rounded-2xl font-bold transition-all active:scale-95"
                         >
                           <LogOut className="w-5 h-5 mr-3" />
                           Logout
@@ -450,7 +450,7 @@ export default function Navbar() {
           <div className="relative w-80 bg-white h-full shadow-2xl flex flex-col overflow-y-auto p-6 rounded-l-xl">
             <button
               onClick={toggleSideNav}
-              className="absolute top-6 right-6 text-[#354B62] hover:text-[#27A395] p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#27A395] bg-gray-50"
+              className="absolute top-6 right-6 cursor-pointer text-[#354B62] hover:text-[#27A395] p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#27A395] bg-gray-50"
             >
               <X className="h-6 w-6" />
             </button>
@@ -472,7 +472,7 @@ export default function Navbar() {
               <div className="space-y-1">
                 <button
                   onClick={() => setIsUserJourneyOpen((v) => !v)}
-                  className="flex w-full items-center justify-between text-left text-[#354B62] hover:text-[#27A395] font-semibold py-3 px-2 rounded-lg hover:bg-gray-50"
+                  className="flex w-full items-center justify-between cursor-pointer text-left text-[#354B62] hover:text-[#27A395] font-semibold py-3 px-2 rounded-lg hover:bg-gray-50"
                 >
                   User Journey
                   <ChevronDown className={`h-5 w-5 transition-transform ${isUserJourneyOpen ? "rotate-180" : ""}`} />
@@ -501,7 +501,7 @@ export default function Navbar() {
               <div className="space-y-1">
                 <button
                   onClick={() => setIsCashlessJourneyOpen((v) => !v)}
-                  className="flex w-full items-center justify-between text-left text-[#354B62] hover:text-[#27A395] font-semibold py-3 px-2 rounded-lg hover:bg-gray-50"
+                  className="flex w-full items-center justify-between cursor-pointer text-left text-[#354B62] hover:text-[#27A395] font-semibold py-3 px-2 rounded-lg hover:bg-gray-50"
                 >
                   Cashless Journey
                   <ChevronDown className={`h-5 w-5 transition-transform ${isCashlessJourneyOpen ? "rotate-180" : ""}`} />
@@ -530,7 +530,7 @@ export default function Navbar() {
               <div className="space-y-1">
                 <button
                   onClick={() => setIsReimbursementJourneyOpen((v) => !v)}
-                  className="flex w-full items-center justify-between text-left text-[#354B62] hover:text-[#27A395] font-semibold py-3 px-2 rounded-lg hover:bg-gray-50"
+                  className="flex w-full items-center justify-between cursor-pointer text-left text-[#354B62] hover:text-[#27A395] font-semibold py-3 px-2 rounded-lg hover:bg-gray-50"
                 >
                   Reimbursement Journey
                   <ChevronDown className={`h-5 w-5 transition-transform ${isReimbursementJourneyOpen ? "rotate-180" : ""}`} />
@@ -563,7 +563,7 @@ export default function Navbar() {
                   clearAuth();
                   setIsSideNavOpen(false);
                 }}
-                className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="w-full cursor-pointer bg-gradient-to-r from-red-500 to-red-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Logout
               </button>
