@@ -207,7 +207,7 @@ const HowItWorks = () => {
         </div>
 
         {/* Improved CTA */}
-        <motion.div 
+        {/* <motion.div 
           className="mt-10 md:mt-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -223,7 +223,7 @@ const HowItWorks = () => {
           <p className="mt-6 text-xs sm:text-sm font-medium text-slate-400">
             No upfront fees. Pay only when your claim is settled.
           </p>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   )

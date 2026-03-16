@@ -148,11 +148,7 @@ export default function Navbar() {
                     onMouseEnter={keepEnterprise}
                     onMouseLeave={closeEnterprise}
                   >
-                    <div className="px-4 py-2 border-b border-gray-100">
-                      <h3 className="text-sm font-semibold text-[#354B62] uppercase tracking-wider">
-                        Hospital Solutions
-                      </h3>
-                    </div>
+
                     {enterpriseSolutions.map((s, i) => (
                       <Link
                         key={i}
@@ -189,11 +185,7 @@ export default function Navbar() {
                     onMouseEnter={keepPersonal}
                     onMouseLeave={closePersonal}
                   >
-                    <div className="px-4 py-2 border-b border-gray-100">
-                      <h3 className="text-sm font-semibold text-[#354B62] uppercase tracking-wider">
-                        Individual Solutions
-                      </h3>
-                    </div>
+
                     {personalSolutions.map((s, i) => (
                       <Link
                         key={i}
@@ -209,6 +201,9 @@ export default function Navbar() {
                 )}
               </div>
 
+              <Link href="/pricing" className="text-[#354B62] hover:text-[#27A395] transition-colors font-medium">
+                Pricing
+              </Link>
               <Link href="/about-us" className="text-[#354B62] hover:text-[#27A395] transition-colors font-medium">
                 About Us
               </Link>
@@ -366,6 +361,14 @@ export default function Navbar() {
                     </AnimatePresence>
                   </div>
 
+                  <Link 
+                    href="/pricing" 
+                    className="flex items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span>Pricing</span>
+                    <ChevronRight className="h-4 w-4 opacity-30" />
+                  </Link>
                   <Link 
                     href="/about-us" 
                     className="flex items-center justify-between px-4 py-3 text-[#354B62] hover:bg-gray-50 rounded-xl font-semibold transition-colors"

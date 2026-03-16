@@ -36,6 +36,8 @@ export const metadata = {
   },
 };
 
+import WhatsAppWidget from "./components/WhatsAppWidget";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -60,6 +62,7 @@ export default function RootLayout({ children }) {
           <AuthProvider>{children}</AuthProvider>
         </main>
         <Footer />
+        <WhatsAppWidget />
       </body>
     </html>
   );

@@ -1,12 +1,26 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import CloudinaryImage from "./CloudinaryImage";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function HeroMain() {
   const sectionRef = useRef(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const images = [
+    "https://res.cloudinary.com/dhlvq35cc/image/upload/v1773569747/c1_volllf.png",
+    "https://res.cloudinary.com/dhlvq35cc/image/upload/v1773678666/banner_hmctzt.png", // Use the same for now, user will add 2nd image
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000); // Change image every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -88,7 +102,7 @@ export default function HeroMain() {
                 <span className="hm-title block">Never Let a Valid</span>
                 <span className="hm-title block mt-1">Health Claim Get</span>
                 <span className="hm-title block mt-1 pb-2 bg-gradient-to-r from-[#27A395] to-[#33A8D3] bg-clip-text text-transparent">
-                  Rejected Again.
+                  Rejected
                 </span>
               </h1>
             </div>
@@ -102,20 +116,20 @@ export default function HeroMain() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-1 justify-center lg:justify-start">
-              <Link href="/signup">
-                <button className="hm-btn w-full sm:w-auto bg-[#354B62] hover:bg-[#2C3E50] text-white px-6 md:px-7 py-3 md:py-4 rounded-xl font-semibold text-[14px] md:text-[15px] inline-flex flex-col items-center justify-center shadow-lg shadow-[#354B62]/20 transition-colors duration-200">
-                  <span className="text-sm md:text-base font-bold">Protect My Family</span>
-                  <span className="text-[10px] md:text-xs text-white/70 font-normal">
+              <Link href="/personal-protection">
+                <button className="hm-btn w-full sm:w-[250px] bg-[#354B62] hover:bg-[#2C3E50] text-white py-4 rounded-2xl font-bold inline-flex flex-col items-center justify-center shadow-xl shadow-[#354B62]/20 transition-all duration-300 hover:-translate-y-1">
+                  <span className="text-base md:text-lg">Protect My Family</span>
+                  <span className="text-[10px] md:text-xs text-white/60 font-medium">
                     (Individuals)
                   </span>
                 </button>
               </Link>
-              <Link href="/signup">
-                <button className="hm-btn w-full sm:w-auto bg-[#27A395] hover:bg-[#229188] text-white px-6 md:px-7 py-3 md:py-4 rounded-xl font-semibold text-[14px] md:text-[15px] inline-flex flex-col items-center justify-center shadow-lg shadow-[#27A395]/25 transition-colors duration-200">
-                  <span className="text-sm md:text-base font-bold">
+              <Link href="/hospital-protection">
+                <button className="hm-btn w-full sm:w-[250px] bg-[#27A395] hover:bg-[#229188] text-white py-4 rounded-2xl font-bold inline-flex flex-col items-center justify-center shadow-xl shadow-[#27A395]/25 transition-all duration-300 hover:-translate-y-1">
+                  <span className="text-base md:text-lg">
                     Optimize My Hospital
                   </span>
-                  <span className="text-[10px] md:text-xs text-white/70 font-normal">
+                  <span className="text-[10px] md:text-xs text-white/60 font-medium">
                     (Providers)
                   </span>
                 </button>
@@ -128,15 +142,29 @@ export default function HeroMain() {
             {/* Soft ambient glow instead of a structured ring */}
             <div className="absolute inset-0 m-auto w-[110%] h-[110%] bg-gradient-to-br from-[#27A395]/10 to-[#33A8D3]/5 blur-3xl pointer-events-none" />
 
-            <div className="hm-image relative w-full lg:max-w-[680px]">
-              <CloudinaryImage
-                src="https://res.cloudinary.com/dhlvq35cc/image/upload/v1773569747/c1_volllf.png"
-                alt="Healthcare team of doctors"
-                width={680}
-                height={550}
-                priority
-                className="w-full h-auto object-contain"
-              />
+            <div className="hm-image relative w-full lg:max-w-[680px] h-[350px] sm:h-[450px] lg:h-[550px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0, scale: 0.95, x: 20 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 1.05, x: -20 }}
+                  transition={{ 
+                    duration: 0.8, 
+                    ease: [0.4, 0, 0.2, 1] 
+                  }}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <CloudinaryImage
+                    src={images[currentImageIndex]}
+                    alt="Healthcare team of doctors"
+                    width={680}
+                    height={550}
+                    priority
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>

@@ -1,74 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { personalPlan, hospitalPlans } from "../../lib/pricingData";
+import { PricingCard } from "./PricingCardShared";
 
 export default function HeroPricing() {
   const [isHospital, setIsHospital] = useState(false);
-  const [openFaq, setOpenFaq] = useState(null);
-
-  const personalPlan = {
-    title: "Personal Protection Plan",
-    price: "₹499",
-    period: "/year",
-    subtext: "Comprehensive coverage for individuals and families.",
-    features: [
-      "Senior Citizen Assistance",
-      "Priority Support",
-      "Proactive Document Check",
-      "Policy Analysis & Guidance",
-      "Digital Claim Locker",
-    ],
-    buttonText: "GET STARTED",
-  };
-
-  const hospitalPlans = [
-    {
-      title: "STARTER",
-      price: "₹1,499",
-      period: "/mo",
-      features: [
-        "Up to 50 Monthly Patient Files",
-        "Basic Empanelment Support",
-        "Email Support",
-        "Standard Dashboard Access",
-      ],
-      buttonText: "REQUEST DEMO",
-      isPopular: false,
-    },
-    {
-      title: "ENTERPRISE",
-      price: "₹3,999",
-      period: "/mo",
-      features: [
-        "Up to 250 Monthly Patient Files",
-        "Priority Empanelment Support",
-        "Dedicated Account Manager",
-        "Advanced Dashboard & Analytics",
-        "Custom Reporting",
-      ],
-      buttonText: "REQUEST DEMO",
-      isPopular: true,
-    },
-    {
-      title: "CUSTOM",
-      price: "Contact Us",
-      period: "",
-      features: [
-        "Unlimited Monthly Patient Files",
-        "Full Empanelment Management",
-        "Dedicated Team",
-        "White-Label Solutions",
-        "API Integration",
-      ],
-      buttonText: "REQUEST QUOTE",
-      isPopular: false,
-      isDark: true,
-    },
-  ];
-
-  const [activeHospitalIdx, setActiveHospitalIdx] = useState(1); // Default to Enterprise
+  const [isPersonalExpanded, setIsPersonalExpanded] = useState(false);
+  const [activeHospitalIdx, setActiveHospitalIdx] = useState(1);
 
   const faqs = [
     {
@@ -85,82 +26,6 @@ export default function HeroPricing() {
     },
   ];
 
-  // Helper component for rendering a single hospital pricing card
-  const PricingCard = ({ plan, isMobile }) => (
-    <div
-      className={`relative bg-white rounded-[2rem] border transition-all duration-500 flex flex-col group ${
-        plan.isPopular
-          ? `border-[#27A395] shadow-[0_32px_64px_-16px_rgba(30,51,71,0.1)] ${isMobile ? "" : "scale-105 z-10"}`
-          : "border-gray-100 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)]"
-      }`}
-    >
-      {plan.isPopular && (
-        <div className="absolute top-0 right-8 -translate-y-1/2 bg-[#33A8D3] text-white text-[10px] font-black py-1.5 px-4 rounded-full shadow-lg tracking-widest">
-          RECOMMENDED
-        </div>
-      )}
-
-      <div className="p-8 md:p-10 flex-grow flex flex-col">
-        <div className="mb-8">
-          <span
-            className={`text-[10px] font-black uppercase tracking-widest ${
-              plan.isPopular ? "text-[#27A395]" : "text-gray-400"
-            }`}
-          >
-            {plan.title === "CUSTOM" ? "High Volume" : "SME Solutions"}
-          </span>
-          <h3 className="text-2xl font-black text-[#1e3347] mt-1 italic">
-            {plan.title}
-          </h3>
-        </div>
-
-        <div className="mb-10 min-h-[64px]">
-          <div className="flex items-baseline gap-1">
-            <span className="text-4xl font-black text-[#1e3347]">
-              {plan.price}
-            </span>
-            {plan.period && (
-              <span className="text-base text-gray-400 font-bold">
-                {plan.period}
-              </span>
-            )}
-          </div>
-        </div>
-
-        <ul className="space-y-4 mb-10 flex-grow">
-          {plan.features.map((feature, fIdx) => (
-            <li key={fIdx} className="flex items-start gap-3">
-              <div
-                className={`mt-1 flex-shrink-0 w-4 h-4 rounded-md flex items-center justify-center ${
-                  plan.isPopular
-                    ? "bg-[#27A395]/10 text-[#27A395]"
-                    : "bg-gray-100 text-gray-400"
-                }`}
-              >
-                <Check className="w-2.5 h-2.5" strokeWidth={5} />
-              </div>
-              <span className="text-[13px] font-bold text-gray-600 leading-tight">
-                {feature}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <button
-          className={`w-full py-4 rounded-2xl font-black text-sm tracking-wider transition-all duration-300 ${
-            plan.isPopular
-              ? "bg-[#27A395] text-white shadow-lg shadow-[#27A395]/20 hover:scale-[1.02]"
-              : plan.isDark
-              ? "bg-[#1e3347] text-white hover:bg-[#27A395] shadow-lg shadow-[#1e3347]/10"
-              : "bg-gray-50 text-[#1e3347] border border-gray-200 hover:bg-white hover:border-[#27A395] hover:text-[#27A395]"
-          }`}
-        >
-          {plan.buttonText}
-        </button>
-      </div>
-    </div>
-  );
-
   return (
     <section className="pt-16 md:pt-24 pb-0 bg-white relative overflow-hidden">
       {/* Background Accents */}
@@ -168,7 +33,6 @@ export default function HeroPricing() {
       <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-gradient-to-tr from-[#33A8D3]/5 to-transparent blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Connective Header */}
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#27A395]/10 border border-[#27A395]/20 mb-4">
             <span className="text-[#27A395] text-[10px] md:text-xs font-extrabold uppercase tracking-widest">
@@ -212,7 +76,7 @@ export default function HeroPricing() {
         </div>
 
         {/* Pricing Content */}
-        <div className="flex flex-col items-center mb-8 md:mb-12">
+        <div className="flex flex-col items-center mb-16">
           <AnimatePresence mode="wait">
             {!isHospital ? (
               <motion.div
@@ -221,71 +85,13 @@ export default function HeroPricing() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.4 }}
-                className="w-full max-w-3xl"
+                className="w-full max-w-4xl"
               >
-                <div className="relative bg-white rounded-[2.5rem] border-2 border-[#27A395] shadow-[0_32px_64px_-16px_rgba(30,51,71,0.1)] overflow-hidden group">
-                  {/* High Clarity Badge */}
-                  <div className="absolute top-5 left-5 px-3 py-1 rounded-full bg-gradient-to-r from-[#27A395] to-[#33A8D3] text-white text-[9px] md:text-[10px] font-black tracking-widest uppercase shadow-lg shadow-[#27A395]/20">
-                    MOST TRUSTED
-                  </div>
-                  
-                  <div className="absolute top-6 right-6 hidden md:flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-[#27A395] animate-pulse" />
-                    <span className="text-[10px] font-black text-[#27A395] uppercase tracking-widest">Recommended for You</span>
-                  </div>
-
-                  <div className="grid md:grid-cols-[1.1fr_0.9fr] md:divide-x divide-[#27A395]/10">
-                    <div className="px-8 pb-8 pt-32 md:p-12">
-                      <div className="mb-10">
-                        <div className="text-[#27A395] text-[10px] font-black uppercase tracking-[0.2em] mb-3">Family Security Plan</div>
-                        <h3 className="text-3xl md:text-4xl font-black text-[#1e3347] mb-3 leading-tight">
-                          {personalPlan.title}
-                        </h3>
-                        <p className="text-gray-500 text-sm md:text-base font-medium leading-relaxed">
-                          {personalPlan.subtext}
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        {personalPlan.features.map((feature, fIdx) => (
-                          <div key={fIdx} className="flex items-center gap-4">
-                            <div className="w-6 h-6 rounded-full bg-[#27A395]/10 flex items-center justify-center shrink-0 border border-[#27A395]/20">
-                              <Check className="w-3.5 h-3.5 text-[#27A395]" strokeWidth={4} />
-                            </div>
-                            <span className="text-sm md:text-base font-bold text-gray-700">
-                              {feature}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="p-8 md:p-12 bg-[#27A395]/5 flex flex-col justify-center items-center text-center">
-                      <div className="mb-10">
-                        <div className="flex items-baseline justify-center gap-1.5">
-                          <span className="text-7xl font-black text-[#1e3347] tracking-tighter">
-                            {personalPlan.price}
-                          </span>
-                          <span className="text-xl text-gray-400 font-bold">
-                            {personalPlan.period}
-                          </span>
-                        </div>
-                      </div>
-
-                      <button className="w-full py-5 px-8 bg-gradient-to-r from-[#27A395] to-[#33A8D3] text-white rounded-2xl font-black text-base tracking-wide hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-[#27A395]/30">
-                        {personalPlan.buttonText}
-                      </button>
-                      <p className="text-[11px] text-gray-500 mt-5 font-bold flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#27A395]" />
-                        For Individuals & Families
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                {/* We use a specialized layout for Personal Card as it usually has a split grid on desktop */}
+                <PricingCard plan={personalPlan} isMobile={false} />
               </motion.div>
             ) : (
               <div className="w-full">
-                {/* Desktop Grid / Mobile Carousel mapping */}
                 <div className="relative">
                   {/* Desktop Only Grid */}
                   <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-6xl mx-auto">
@@ -359,7 +165,6 @@ export default function HeroPricing() {
             )}
           </AnimatePresence>
         </div>
-
       </div>
     </section>
   );
