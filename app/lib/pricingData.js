@@ -6,7 +6,7 @@ export const personalPlan = {
   price: "₹499",
   period: "/year",
   target: "Individual Policyholders",
-  patients: "1 Individual",
+  patients: "1Person",
   subtext: "Comprehensive coverage for individuals and families protecting their health claims.",
   features: [
     "Pre-Submission Claim Audit",

@@ -74,10 +74,10 @@ const HowItWorks = () => {
   const steps = activeTab === 'individuals' ? individualSteps : hospitalSteps
 
   return (
-    <section className="py-12 md:py-20 bg-[#FAFCFF] overflow-hidden relative">
+    <section className="py-12 md:py-20 bg-[#0B1221] overflow-hidden relative">
       {/* Background patterns */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#33A8D3]/5 to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#27A395]/5 to-transparent pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#33A8D3]/10 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#27A395]/10 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <motion.div
@@ -86,19 +86,19 @@ const HowItWorks = () => {
           viewport={{ once: true }}
           className="text-center mb-16 md:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[900] text-[#1e3347] tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[900] text-white tracking-tight mb-6">
             How <span className="text-[#33A8D3]">ClaimTrue</span> Works
           </h2>
-          <p className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-4">
+          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-4">
             Our streamlined process ensures your claims are handled with precision, speed, and absolute transparency.
           </p>
           
           {/* Custom Toggle Switch */}
-          <div className="inline-flex p-1.5 bg-white border border-slate-200 rounded-2xl md:rounded-full mt-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative">
+          <div className="inline-flex p-1.5 bg-[#151D2C] border border-slate-800 rounded-2xl md:rounded-full mt-10 shadow-2xl relative">
             <button
               onClick={() => setActiveTab('individuals')}
               className={`relative z-10 px-6 sm:px-10 py-3.5 rounded-xl md:rounded-full text-xs sm:text-sm font-bold transition-colors duration-500 ${
-                activeTab === 'individuals' ? 'text-white' : 'text-[#354B62] hover:text-[#27A395]'
+                activeTab === 'individuals' ? 'text-white' : 'text-slate-400 hover:text-[#27A395]'
               }`}
             >
               For Individuals
@@ -106,7 +106,7 @@ const HowItWorks = () => {
             <button
               onClick={() => setActiveTab('hospitals')}
               className={`relative z-10 px-6 sm:px-10 py-3.5 rounded-xl md:rounded-full text-xs sm:text-sm font-bold transition-colors duration-500 ${
-                activeTab === 'hospitals' ? 'text-white' : 'text-[#354B62] hover:text-[#27A395]'
+                activeTab === 'hospitals' ? 'text-white' : 'text-slate-400 hover:text-[#27A395]'
               }`}
             >
               For Hospitals
@@ -126,7 +126,7 @@ const HowItWorks = () => {
         {/* Steps Grid */}
         <div className="relative min-h-[300px]">
           {/* Connector Line (Desktop) */}
-          <div className="hidden lg:block absolute top-[64px] left-[12%] right-[12%] h-1 bg-slate-100 rounded-full z-0 overflow-hidden">
+          <div className="hidden lg:block absolute top-[64px] left-[12%] right-[12%] h-1 bg-slate-800 rounded-full z-0 overflow-hidden">
             <motion.div 
               className="h-full bg-gradient-to-r from-[#27A395] to-[#33A8D3]"
               initial={{ width: 0 }}
@@ -137,7 +137,7 @@ const HowItWorks = () => {
           </div>
 
           {/* Vertical Connector Line (Mobile) */}
-          <div className="lg:hidden absolute top-[64px] bottom-[100px] left-[44px] sm:left-[50%] w-0.5 bg-slate-100 z-0">
+          <div className="lg:hidden absolute top-[64px] bottom-[100px] left-[44px] sm:left-[50%] w-0.5 bg-slate-800 z-0">
             <motion.div 
               className="w-full bg-gradient-to-b from-[#27A395] to-[#33A8D3]"
               initial={{ height: 0 }}
@@ -175,16 +175,16 @@ const HowItWorks = () => {
                       {/* Icon Container */}
                       <motion.div 
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="w-20 h-20 sm:w-28 sm:h-28 rounded-3xl lg:rounded-full bg-white shadow-[0_20px_50px_rgba(0,0,0,0.06)] flex items-center justify-center p-3 relative z-10 border border-slate-50"
+                        className="w-20 h-20 sm:w-28 sm:h-28 rounded-3xl lg:rounded-full bg-[#151D2C] shadow-2xl flex items-center justify-center p-3 relative z-10 border border-slate-800"
                       >
-                        <div className="w-full h-full rounded-2xl lg:rounded-full bg-gradient-to-br from-[#E8F6F4] to-[#F1F9FD] flex items-center justify-center text-[#27A395] group-hover:text-white group-hover:bg-gradient-to-r group-hover:from-[#27A395] group-hover:to-[#33A8D3] transition-all duration-500 shadow-inner">
+                        <div className="w-full h-full rounded-2xl lg:rounded-full bg-gradient-to-br from-[#1A2436] to-[#0B1221] flex items-center justify-center text-[#27A395] group-hover:text-white group-hover:bg-gradient-to-r group-hover:from-[#27A395] group-hover:to-[#33A8D3] transition-all duration-500 shadow-inner">
                           <step.icon className="w-8 h-8 sm:w-10 sm:h-10 transition-transform duration-500 group-hover:scale-110" strokeWidth={1.5} />
                         </div>
                       </motion.div>
                       
                       {/* Step Number Dot */}
-                      <div className="absolute -top-2 -right-2 w-7 h-7 sm:w-9 sm:h-9 bg-white rounded-full flex items-center justify-center shadow-md z-20 border-2 border-slate-50">
-                        <span className="text-[10px] sm:text-xs font-black text-[#1e3347]">{step.id}</span>
+                      <div className="absolute -top-2 -right-2 w-7 h-7 sm:w-9 sm:h-9 bg-[#1A2436] rounded-full flex items-center justify-center shadow-lg z-20 border-2 border-slate-800">
+                        <span className="text-[10px] sm:text-xs font-black text-white">{step.id}</span>
                       </div>
 
                       {/* Pulse Effect on Hover */}
@@ -192,10 +192,10 @@ const HowItWorks = () => {
                     </div>
 
                     <div className="flex-grow">
-                      <h3 className="text-lg sm:text-xl font-[900] text-[#1e3347] mb-2 sm:mb-4 tracking-tight group-hover:text-[#27A395] transition-colors duration-300">
+                      <h3 className="text-lg sm:text-xl font-[900] text-white mb-2 sm:mb-4 tracking-tight group-hover:text-[#27A395] transition-colors duration-300">
                         {step.title}
                       </h3>
-                      <p className="text-[#354B62]/70 text-sm sm:text-base leading-relaxed max-w-[280px]">
+                      <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-[280px]">
                         {step.description}
                       </p>
                     </div>
@@ -205,25 +205,6 @@ const HowItWorks = () => {
             </AnimatePresence>
           </div>
         </div>
-
-        {/* Improved CTA */}
-        {/* <motion.div 
-          className="mt-10 md:mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <button className="group relative px-12 py-5 bg-[#1e3347] text-white rounded-2xl font-black text-base sm:text-xl overflow-hidden transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.15)] hover:-translate-y-1 active:scale-95">
-            <span className="relative z-10">
-              Check ROI
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#27A395] to-[#33A8D3] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          </button>
-          
-          <p className="mt-6 text-xs sm:text-sm font-medium text-slate-400">
-            No upfront fees. Pay only when your claim is settled.
-          </p>
-        </motion.div> */}
       </div>
     </section>
   )

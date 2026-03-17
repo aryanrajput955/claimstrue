@@ -11,9 +11,12 @@ export const metadata = {
 };
 
 export default function HospitalProtectionPage() {
+  // Pass the hero image URL here when available
+  const heroImageUrl = "https://res.cloudinary.com/dhlvq35cc/image/upload/v1773737693/doc_ii0ipq.jpg"; 
+
   return (
     <main>
-      <HospitalProtectionDetails />
+      <HospitalProtectionDetails heroImageUrl={heroImageUrl} />
     </main>
   );
 }

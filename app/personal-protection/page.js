@@ -10,8 +10,8 @@ export const metadata = {
 };
 
 export default function Page() {
-  // Use the generated hero image from the artifacts
-  const heroImageUrl = "/personal_protection_hero_1773672193039.png";
+  // Use the Cloudinary hero image
+  const heroImageUrl = "https://res.cloudinary.com/dhlvq35cc/image/upload/v1773741267/personal_protection_hero_1773672193039_g5m2if.png";
   
   return (
     <main>

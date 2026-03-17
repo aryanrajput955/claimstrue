@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import CloudinaryImage from './newcomponents/CloudinaryImage';
 
 const PersonalProtectionDetails = ({ heroImageUrl }) => {
   const steps = [
@@ -62,10 +63,12 @@ const PersonalProtectionDetails = ({ heroImageUrl }) => {
       <section className="relative min-h-screen flex items-center pt-24 overflow-hidden">
         {/* Mobile Background Image (Visible only on mobile) */}
         <div className="absolute inset-0 z-0 lg:hidden">
-          <img 
-            src={heroImageUrl} 
+          <CloudinaryImage 
+            src={heroImageUrl || "/personal_protection_hero_1773672193039.png"} 
             alt="Protected Family" 
-            className="w-full h-full object-cover brightness-[0.4]"
+            width={800}
+            height={1200}
+            className="w-full h-full brightness-[0.4]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1e3347]/80 to-[#1e3347]/40" />
         </div>
@@ -73,10 +76,12 @@ const PersonalProtectionDetails = ({ heroImageUrl }) => {
         {/* Desktop Image Layout (Maintained) */}
         <div className="absolute top-0 right-0 w-[45%] h-full hidden lg:block z-0">
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/40 to-[#fcfdfe] z-10" />
-          <img 
-            src={heroImageUrl} 
+          <CloudinaryImage 
+            src={heroImageUrl || "/personal_protection_hero_1773672193039.png"} 
             alt="Protected Family" 
-            className="w-full h-full object-cover"
+            width={1200}
+            height={1600}
+            className="w-full h-full"
           />
         </div>
         

@@ -11,7 +11,7 @@ export default function HeroMain() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const images = [
-    "https://res.cloudinary.com/dhlvq35cc/image/upload/v1773569747/c1_volllf.png",
+    "https://res.cloudinary.com/dhlvq35cc/image/upload/v1773580654/individual_rdge4d.png",
     "https://res.cloudinary.com/dhlvq35cc/image/upload/v1773678666/banner_hmctzt.png", // Use the same for now, user will add 2nd image
   ];
 
